@@ -1,4 +1,3 @@
-import "../styles/globals.css";
 import "next/head";
 import React from "react";
 import Appbar from "../src/components/AppBar";
