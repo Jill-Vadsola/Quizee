@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Quize</title>
+        <title>Quizeeey</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
     </div>
