@@ -7,7 +7,6 @@ First, run the development server:
 ```bash
 
 npm install
-
 npm run dev
 
 ```
@@ -15,10 +14,11 @@ npm run dev
 ### Send Your Code To Github
 
 ```bash
-git remote add origin git@github.com:Shreyansh-Sheth/quize.git
+git remote add origin https://github.com/Shreyansh-Sheth/quize.git
 git add -A
-git commit -m "Enter What You have Done"
+git commit -m "First Commit"
 git checkout main
+git push -u origin main
 
 
 ```
