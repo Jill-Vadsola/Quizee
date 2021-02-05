@@ -1,3 +1,3 @@
-export default function Join() {
-  return <h1></h1>;
+export default function Login() {
+  return <h1>Hello</h1>;
 }
