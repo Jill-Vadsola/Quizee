@@ -31,7 +31,13 @@ export default function App() {
     </Button>,
   ];
   const AuthButtons = [
-    <Button type="primary" danger>
+    <Button
+      type="primary"
+      danger
+      onClick={(e) => {
+        firebase.auth().signOut();
+      }}
+    >
       SignOut
     </Button>,
   ];
