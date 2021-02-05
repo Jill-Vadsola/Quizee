@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Quizeeey</title>
+        <title>Quizee</title>
         <link rel="icon"></link>
       </Head>
     </div>
