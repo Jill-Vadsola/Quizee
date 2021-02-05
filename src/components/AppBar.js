@@ -30,7 +30,11 @@ export default function App() {
       Login
     </Button>,
   ];
-  const AuthButtons = [];
+  const AuthButtons = [
+    <Button type="primary" danger>
+      SignOut
+    </Button>,
+  ];
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {

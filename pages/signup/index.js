@@ -9,8 +9,11 @@ import {
   Button,
   AutoComplete,
   DatePicker,
-} from 'antd';
-
+} from "antd";
+const { Option } = AutoComplete;
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { auth } from "../../src/config/firebaseConfig";
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -29,82 +32,173 @@ const formItemLayout = {
     },
   },
 };
-const RegistrationForm = () => {
-  const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+const RegistrationForm = () => {
+  const [result, setResult] = useState([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [bady, setBday] = useState("");
+  const [form] = Form.useForm();
+  const router = useRouter();
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        route.push("/");
+      }
+    });
+  }, []);
+
+  const handleSearch = (value) => {
+    let res = [];
+
+    if (!value || value.indexOf("@") >= 0) {
+      res = [];
+    } else {
+      res = ["gmail.com", "yahoo.com", "outlook.com"].map(
+        (domain) => `${value}@${domain}`
+      );
+    }
+    setResult(res);
   };
 
-return (
-  <Form
-    {...formItemLayout}
-    form={form}
-    name="register"
-    onFinish={onFinish}
-    scrollToFirstError
-  >
-    <Form.Item
-      name="email"
-      label="E-mail"
-      rules={[
-        {
-          type: 'email',
-          message: 'The input is not valid E-mail!',
-        },
-        {
-          required: true,
-          message: 'Please input your E-mail!',
-        },
-      ]}
+  const onFinish = (values) => {
+    console.log("Received values of form: ", values);
+  };
+  const CreateUser = async () => {
+    try {
+      const values = await form.validateFields();
+    } catch {
+      return;
+    }
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(function (result) {
+        return result.user
+          .updateProfile({
+            displayName: username,
+          })
+          .then(() => {
+            router.push("/");
+          });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  return (
+    <Form
+      style={{
+        marginTop: "70px",
+        marginLeft: "500px",
+        marginRight: "500px",
+      }}
+      {...formItemLayout}
+      form={form}
+      name="register"
+      onFinish={onFinish}
+      scrollToFirstError
+      labelAlign="left"
     >
-      <Input />
-    </Form.Item>
-
-    <Form.Item
-      name="password"
-      label="Password"
-      rules={[
-        {
-          required: true,
-          message: 'Please input your password!',
-        },
-      ]}
-      hasFeedback
-    >
-      <Input.Password />
-    </Form.Item>
-
-    <Form.Item
-      name="confirm"
-      label="Confirm Password"
-      dependencies={['password']}
-      hasFeedback
-      rules={[
-        {
-          required: true,
-          message: 'Please confirm your password!',
-        },
-        ({ getFieldValue }) => ({
-          validator(_, value) {
-            if (!value || getFieldValue('password') === value) {
-              return Promise.resolve();
-            }
-
-            return Promise.reject('The two passwords that you entered do not match!');
+      <Form.Item
+        label="Email"
+        value={email}
+        onChange={(e) => {
+          console.log(e.target.value);
+          setEmail(e.target.value);
+        }}
+        rules={[
+          {
+            required: true,
+            message: "Please input your Email!",
           },
-        }),
-      ]}
-    >
-      <Input.Password />
-    </Form.Item>
-    <Form.Item label="Birth Date">
-          <DatePicker />
-          </Form.Item>
-          <Button type="primary" htmlType="submit">
-          Signin
-        </Button>
+        ]}
+      >
+        <AutoComplete onSearch={handleSearch} placeholder="Email">
+          {result.map((email) => (
+            <Option key={email} value={email}>
+              {email}
+            </Option>
+          ))}
+        </AutoComplete>
+      </Form.Item>
+
+      <Form.Item
+        name="username"
+        label="Username"
+        rules={[
+          {
+            required: true,
+            message: "Please Input Username",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        value={password}
+        name="password"
+        label="Password"
+        rules={[
+          {
+            required: true,
+            message: "Please input your password!",
+          },
+        ]}
+        hasFeedback
+      >
+        <Input.Password
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+      </Form.Item>
+
+      <Form.Item
+        name="confirm"
+        label="Confirm Password"
+        dependencies={["password"]}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: "Please confirm your password!",
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue("password") === value) {
+                return Promise.resolve();
+              }
+
+              return Promise.reject(
+                "The two passwords that you entered do not match!"
+              );
+            },
+          }),
+        ]}
+      >
+        <Input.Password />
+      </Form.Item>
+      <Form.Item
+        label="Birth Date"
+        rules={[
+          {
+            required: true,
+            message: "Please add your birthday",
+          },
+        ]}
+      >
+        <DatePicker
+          onChange={(e, x) => {
+            setBday(x);
+          }}
+        />
+      </Form.Item>
+      <Button type="primary" onClick={CreateUser}>
+        Signin
+      </Button>
     </Form>
-      );
+  );
 };
 export default RegistrationForm;
