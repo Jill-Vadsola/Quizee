@@ -1,7 +1,25 @@
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { AutoComplete } from 'antd';
+const { Option } = AutoComplete;
 
-const NormalLoginForm = () => {
+const Complete = () => {
+  const [result, setResult] = useState([]);
+
+  const handleSearch = (value) => {
+    let res = [];
+
+    if (!value || value.indexOf('@') >= 0) {
+      res = [];
+    } else {
+      res = ['gmail.com', 'yahoo.com', 'outlook.com'].map((domain) => `${value}@${domain}`);
+    }
+
+    setResult(res);
+  };
+
+
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
@@ -28,7 +46,19 @@ marginLeft:"40%"}}
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        <AutoComplete
+      style={{
+        width: "300px",
+      }}
+      onSearch={handleSearch}
+      placeholder="Username"
+    >
+      {result.map((email) => (
+        <Option key={email} value={email}>
+          {email}
+        </Option>
+      ))}
+    </AutoComplete>
       </Form.Item>
       <Form.Item
         name="password"
@@ -62,4 +92,4 @@ marginLeft:"40%"}}
     </Form>
   );
 };
-export default NormalLoginForm;
+export default Complete;
