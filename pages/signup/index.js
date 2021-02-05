@@ -59,7 +59,8 @@ const RegistrationForm = () => {
         (domain) => `${value}@${domain}`
       );
     }
-    setResult(res);
+
+    console.error(res);
   };
 
   const onFinish = (values) => {
@@ -71,6 +72,7 @@ const RegistrationForm = () => {
     } catch {
       return;
     }
+    console.error(email);
     auth
       .createUserWithEmailAndPassword(email, password)
       .then(function (result) {

@@ -1,27 +1,15 @@
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AutoComplete } from "antd";
-import Link from "next/link";
-import { auth } from "../../src/config/firebaseConfig";
 const { Option } = AutoComplete;
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-
-const Login = () => {
+import { auth } from "../../src/config/firebaseConfig";
+const Complete = () => {
   const [result, setResult] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const form = Form.useForm();
   const router = useRouter();
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        router.push("/");
-      }
-    });
-  }, []);
 
   const handleSearch = (value) => {
     let res = [];
@@ -36,22 +24,27 @@ const Login = () => {
 
     setResult(res);
   };
+  useEffect(() => {
+    auth.onAuthStateChanged(function (user) {
+      if (user) {
+        router.push("/");
+      }
+    });
+  }, []);
 
-  const loginUser = async () => {
-    try {
-      const values = await form.validateFields();
-    } catch {
-      return;
-    }
+  function LoginWithFirebase() {
     auth
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then((userCredential) => {
+        // Signed in
         router.push("/");
+        // ...
       })
-      .catch((err) => {
-        //todo:add error signin
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
       });
-  };
+  }
 
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
@@ -59,29 +52,34 @@ const Login = () => {
 
   return (
     <Form
-      form={form}
       style={{ maxWidth: "300px", marginTop: "150px", marginLeft: "40%" }}
+      name="normal_login"
       className="login-form"
+      initialValues={{
+        remember: true,
+      }}
       onFinish={onFinish}
-      name="login"
     >
       <Form.Item
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Username!",
+          },
+        ]}
         value={email}
         onChange={(e) => {
           console.log(e.target.value);
           setEmail(e.target.value);
         }}
-        rules={[
-          {
-            required: true,
-            message: "Please input your Email!",
-          },
-        ]}
       >
         <AutoComplete
+          style={{
+            width: "300px",
+          }}
           onSearch={handleSearch}
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder={"Email"}
+          placeholder="Email"
         >
           {result.map((email) => (
             <Option key={email} value={email}>
@@ -91,8 +89,12 @@ const Login = () => {
         </AutoComplete>
       </Form.Item>
       <Form.Item
-        //name="password"
-
+        name="password"
+        value={password}
+        onChange={(e) => {
+          console.log(password);
+          setPassword(e.target.value);
+        }}
         rules={[
           {
             required: true,
@@ -101,9 +103,6 @@ const Login = () => {
         ]}
       >
         <Input
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"
@@ -115,23 +114,17 @@ const Login = () => {
         </a>
       </Form.Item>
 
-      <Form.Item
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
+      <Form.Item>
         <Button
+          onClick={LoginWithFirebase}
           type="primary"
-          onClick={loginUser}
+          htmlType="submit"
           className="login-form-button"
         >
           Log in
         </Button>
-
-        <Link href="/signup">register now!</Link>
       </Form.Item>
     </Form>
   );
 };
-export default Login;
+export default Complete;
