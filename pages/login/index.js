@@ -47,9 +47,9 @@ marginLeft:"40%"}}
         ]}
       >
         <AutoComplete
-      style={{
-        width: "300px",
-      }}
+        style={{
+          width: "300px",
+        }}
       onSearch={handleSearch}
       placeholder="Username"
     >
