@@ -58,3 +58,4 @@ const NormalLoginForm = () => {
     </Form>
   );
 };
+export default NormalLoginForm;
