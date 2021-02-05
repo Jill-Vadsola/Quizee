@@ -7,13 +7,13 @@ import { auth } from "../../src/config/firebaseConfig";
 const { Option } = AutoComplete;
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { route } from "next/dist/next-server/server/router";
 
 const Login = () => {
   const [result, setResult] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const form = useForm();
+
+  const form = Form.useForm();
   const router = useRouter();
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -61,12 +61,9 @@ const Login = () => {
     <Form
       form={form}
       style={{ maxWidth: "300px", marginTop: "150px", marginLeft: "40%" }}
-      name="normal_login"
       className="login-form"
-      initialValues={{
-        remember: true,
-      }}
       onFinish={onFinish}
+      name="login"
     >
       <Form.Item
         value={email}
@@ -94,7 +91,8 @@ const Login = () => {
         </AutoComplete>
       </Form.Item>
       <Form.Item
-        name="password"
+        //name="password"
+
         rules={[
           {
             required: true,
@@ -103,6 +101,9 @@ const Login = () => {
         ]}
       >
         <Input
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"
