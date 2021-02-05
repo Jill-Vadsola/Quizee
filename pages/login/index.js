@@ -1,3 +1,3 @@
 export default function Join() {
-  return <h1>Join Page</h1>;
+  return <h1></h1>;
 }
