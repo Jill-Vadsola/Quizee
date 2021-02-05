@@ -14,8 +14,21 @@ export default function App() {
   const [links, setLinks] = useState();
 
   const nonAuthButtons = [
-    <Button>SignUp</Button>,
-    <Button type="primary">Login</Button>,
+    <Button
+      onClick={(e) => {
+        router.push("/signup");
+      }}
+    >
+      SignUp
+    </Button>,
+    <Button
+      type="primary"
+      onClick={(e) => {
+        router.push("/login");
+      }}
+    >
+      Login
+    </Button>,
   ];
   const AuthButtons = [];
   useEffect(() => {
