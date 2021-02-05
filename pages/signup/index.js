@@ -12,7 +12,7 @@ import {
 } from "antd";
 const { Option } = AutoComplete;
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "../../src/config/firebaseConfig";
 const formItemLayout = {
   labelCol: {
@@ -44,7 +44,7 @@ const RegistrationForm = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        route.push("/");
+        router.push("/");
       }
     });
   }, []);
