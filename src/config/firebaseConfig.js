@@ -9,10 +9,12 @@ let firebaseConfig = {
   appId: "1:778853875575:web:a4b35f80663aa8a762eb72",
   measurementId: "G-8S9F4NFMQD",
 };
+const auth;
 // Initialize Firebase
 try {
   const app = firebase.initializeApp(firebaseConfig);
   firebase.analytics();
-  const auth = firebase.auth(app);
-  export { auth };
+  auth = firebase.auth(app);
+ 
 } catch {}
+export { auth };
