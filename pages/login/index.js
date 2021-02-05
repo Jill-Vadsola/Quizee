@@ -22,7 +22,7 @@ const Complete = () => {
       );
     }
 
-    setResult(res);
+    setResult([]);
   };
   useEffect(() => {
     auth.onAuthStateChanged(function (user) {
@@ -46,10 +46,6 @@ const Complete = () => {
       });
   }
 
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
-
   return (
     <Form
       style={{ maxWidth: "300px", marginTop: "150px", marginLeft: "40%" }}
@@ -58,7 +54,6 @@ const Complete = () => {
       initialValues={{
         remember: true,
       }}
-      onFinish={onFinish}
     >
       <Form.Item
         name="username"
@@ -70,7 +65,6 @@ const Complete = () => {
         ]}
         value={email}
         onChange={(e) => {
-          console.log(e.target.value);
           setEmail(e.target.value);
         }}
       >
@@ -92,7 +86,6 @@ const Complete = () => {
         name="password"
         value={password}
         onChange={(e) => {
-          console.log(password);
           setPassword(e.target.value);
         }}
         rules={[

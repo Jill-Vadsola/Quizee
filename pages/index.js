@@ -5,9 +5,22 @@ import Icon from "@ant-design/icons";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { auth } from "../src/config/firebaseConfig";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [isauth, setIsAuth] = useState(false);
+
   const style = { background: "#0092ff", padding: "8px 0" };
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsAuth(true);
+      } else {
+        setIsAuth(false);
+      }
+    });
+  }, []);
+
   return (
     <div>
       <Head>
@@ -15,20 +28,20 @@ export default function Home() {
         <link rel="icon"></link>
       </Head>
       <div>
-        {!auth.currentUser ? (
+        {isauth ? (
           <div>
             <Divider></Divider>
 
             <Descriptions
               bordered
-              title="Venus Patel"
+              title={auth.currentUser.providerData[0].displayName}
               column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
             >
               <Descriptions.Item label="competitive matches">
                 7
               </Descriptions.Item>
               <Descriptions.Item label="Winrate">80%</Descriptions.Item>
-              <Descriptions.Item label="Rank">Bronze 3</Descriptions.Item>
+              <Descriptions.Item label="Rank">Silver 1</Descriptions.Item>
               <Descriptions.Item label="Best Catagory">Geo</Descriptions.Item>
             </Descriptions>
             <Divider></Divider>

@@ -59,20 +59,14 @@ const RegistrationForm = () => {
         (domain) => `${value}@${domain}`
       );
     }
-
-    console.error(res);
   };
 
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
   const CreateUser = async () => {
     try {
       const values = await form.validateFields();
     } catch {
       return;
     }
-    console.error(email);
     auth
       .createUserWithEmailAndPassword(email, password)
       .then(function (result) {
@@ -84,9 +78,7 @@ const RegistrationForm = () => {
             router.push("/");
           });
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(function (error) {});
   };
   return (
     <Form
@@ -98,7 +90,6 @@ const RegistrationForm = () => {
       {...formItemLayout}
       form={form}
       name="register"
-      onFinish={onFinish}
       scrollToFirstError
       labelAlign="left"
     >
@@ -106,7 +97,6 @@ const RegistrationForm = () => {
         label="Email"
         value={email}
         onChange={(e) => {
-          console.log(e.target.value);
           setEmail(e.target.value);
         }}
         rules={[
@@ -128,6 +118,10 @@ const RegistrationForm = () => {
       <Form.Item
         name="username"
         label="Username"
+        value={username}
+        onChange={(e) => {
+          setUsername(e.target.value);
+        }}
         rules={[
           {
             required: true,
