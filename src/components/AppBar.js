@@ -35,7 +35,7 @@ export default function App() {
       type="primary"
       danger
       onClick={(e) => {
-        firebase.auth().signOut();
+        auth.signOut();
       }}
     >
       SignOut
