@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, Alert } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import React, { useState, useEffect } from "react";
 import { AutoComplete } from "antd";
@@ -9,6 +9,7 @@ const Complete = () => {
   const [result, setResult] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [alert, setAlert] = useState(false);
   const router = useRouter();
 
   const handleSearch = (value) => {
@@ -43,6 +44,7 @@ const Complete = () => {
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
+        setAlert(true);
       });
   }
 
@@ -55,6 +57,21 @@ const Complete = () => {
         remember: true,
       }}
     >
+      {alert ? (
+        <Alert
+          style={{
+            marginBottom: "15px",
+          }}
+          message="Please Enter Correct Email And Password"
+          type="warning"
+          closable
+          onClose={() => {
+            setAlert(false);
+          }}
+        ></Alert>
+      ) : (
+        <React.Fragment></React.Fragment>
+      )}
       <Form.Item
         name="username"
         rules={[
@@ -102,7 +119,13 @@ const Complete = () => {
         />
       </Form.Item>
       <Form.Item>
-        <a className="login-form-forgot" href="">
+        <a
+          onClick={() => {
+            auth.sendPasswordResetEmail(email);
+          }}
+          className="login-form-forgot"
+          href=""
+        >
           Forgot password
         </a>
       </Form.Item>

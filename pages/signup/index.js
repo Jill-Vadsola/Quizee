@@ -70,6 +70,7 @@ const RegistrationForm = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then(function (result) {
+        result.user.sendEmailVerification();
         return result.user
           .updateProfile({
             displayName: username,
