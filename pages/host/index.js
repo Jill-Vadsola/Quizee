@@ -3,31 +3,27 @@ import { useState, useEffect } from "react";
 import ChatBox from "../../src/components/ChatBox";
 import { auth, db } from "../../src/config/firebaseConfig";
 export default function Host() {
-  const [roomId, setRoomId] = useState(false);
-  const [chatRoomId, setChatRoomId] = useState();
+  const [roomId, setRoomId] = useState("");
+  const [chatRoomId, setChatRoomId] = useState("");
   useEffect(() => {
     const createRoom = async () => {
-      const chatRoomsRes = await db.collection("chatRooms").add({ chats: [] });
-      setChatRoomId(chatRoomId);
-      const res = await db.collection("rooms").add({
-        chatRoomId: chatRoomsRes.id,
-        members: [
-          { id: auth.currentUser.uid, name: auth.currentUser.displayName },
-        ],
-        roomType: "Host",
+      let chatroomRef = await db.collection("chatRooms").add({
+        chats: [],
       });
-      setRoomId(res.id);
-      console.log(res.id, chatRoomsRes.id);
+      setChatRoomId(chatroomRef.id);
+      let gameRoomRef = await db.collection("gameRoom").add({
+        chatRoomId: chatroomRef.id,
+        playersData: [{ name: "shreyansh", id: "xanxhuasnxhuasn" }],
+      });
+      setRoomId(gameRoomRef.id);
+      console.log(roomId);
     };
-    auth.onAuthStateChanged((user) => {
-      if (user && !roomId) {
-        createRoom();
-      }
-    });
+    createRoom();
   }, []);
 
   return (
     <div>
+      <h1>{roomId}</h1>
       <Row justify="center" align="top">
         <Col span={6} pull={18}>
           {roomId}
