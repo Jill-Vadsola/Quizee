@@ -7,6 +7,9 @@ export default function ChatBox({ ChatRoomId }) {
   const [chats, setChats] = useState([]);
   const [message, setMessage] = useState("");
   useEffect(() => {
+    if (!ChatRoomId) {
+      return;
+    }
     let unsubscribe = db
       .collection("chatRooms")
       .doc(ChatRoomId)
@@ -15,18 +18,18 @@ export default function ChatBox({ ChatRoomId }) {
           return;
         }
 
-        setChats(snapshot.data());
+        setChats(snapshot.data().chats);
         console.log(snapshot.data());
       });
 
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [ChatRoomId]);
   return (
     <div>
-      {chats ? (
-        chats.filter((c) => (
+      {chats.length !== 0 ? (
+        chats.map((c) => (
           <Message
             content={c.content}
             name={c.name}
