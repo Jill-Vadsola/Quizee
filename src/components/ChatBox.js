@@ -33,6 +33,7 @@ export default function ChatBox({ ChatRoomId }) {
           <Message
             content={c.content}
             name={c.name}
+            key={c.content}
             isMe={c.uid === auth.currentUser.uid}
           ></Message>
         ))

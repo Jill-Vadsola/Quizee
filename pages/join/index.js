@@ -9,7 +9,6 @@ export default function Join() {
   useEffect(() => {
     const connectRoom = async () => {
       if (roomCode !== "") {
-        //        let gameRoomRef = await db.collection("gameRoom").add({
         let gameRoomData = await db.collection("gameRoom").doc(roomCode).get();
 
         setChatRoomCode(gameRoomData.data().chatRoomId);
