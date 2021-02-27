@@ -99,24 +99,21 @@ function CardForGameMode({ imagePath, RedirectPath, name }) {
         onClick={() => {
           router.push(RedirectPath);
         }}
-        width="300px"
-        height="300px"
+        width="250px"
+        height="250px"
         src={imagePath}
         alt={name}
       ></Image>
-      <div
+      <p
         style={{
-          position: "absolute",
-          bottom: "-20px",
-
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          fontSize: "45px",
+          textAlign: "center",
+          left: "13vw",
+          fontSize: "3vw",
           color: "black",
         }}
       >
         {name}
-      </div>
+      </p>
     </div>
   );
 }
