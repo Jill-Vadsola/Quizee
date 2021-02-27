@@ -84,9 +84,9 @@ const RegistrationForm = () => {
   return (
     <Form
       style={{
+        marginLeft: "20vw",
+        marginRight: "20vw",
         marginTop: "70px",
-        marginLeft: "500px",
-        marginRight: "500px",
       }}
       {...formItemLayout}
       form={form}
@@ -107,7 +107,7 @@ const RegistrationForm = () => {
           },
         ]}
       >
-        <AutoComplete onSearch={handleSearch} placeholder="Email">
+        <AutoComplete onSearch={handleSearch}>
           {result.map((email) => (
             <Option key={email} value={email}>
               {email}

@@ -17,6 +17,7 @@ export default function Host() {
         roomType: "Host",
       });
       setRoomId(res.id);
+      console.log(res.id, chatRoomsRes.id);
     };
     auth.onAuthStateChanged((user) => {
       if (user && !roomId) {
