@@ -52,7 +52,7 @@ export default function ChatBox({ ChatRoomId }) {
       )}
       <div
         style={{
-          position: "sticky",
+          position: "absolute ",
           bottom: "1px",
           left: "0px",
           right: "0px",
@@ -118,7 +118,7 @@ function Message({ content, name, isMe }) {
       >
         <Text
           style={{
-            fontSize: "12px",
+            fontSize: "120px",
             color: "white",
             fontWeight: "bold",
           }}

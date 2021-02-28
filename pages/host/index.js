@@ -24,8 +24,12 @@ export default function Host() {
   return (
     <div>
       <h1>{roomId}</h1>
-      <Row justify="center" align="top">
-        <Col span={6} pull={18}>
+      <Row 
+      style={{
+        paddingRight:"20vw",
+      }}
+      >
+        <Col span={6} pull={6}>
           {roomId}
         </Col>
         <Col span={18} push={6}>
