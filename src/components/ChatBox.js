@@ -27,74 +27,73 @@ export default function ChatBox({ ChatRoomId }) {
     };
   }, [ChatRoomId]);
   return (
-    <div
-      style={{
-        backgroundColor: "#282c34",
-        border: "1px solid black",
-        width: "300px",
-        height: "400px",
-        maxWidth: "70%",
-        overflowY: "scroll",
-        //overflow: "scroll",
-      }}
-    >
-      {chats.length !== 0 ? (
-        chats.map((c) => (
-          <Message
-            content={c.content}
-            name={c.name}
-            key={c.content}
-            isMe={c.uid === auth.currentUser.uid}
-          ></Message>
-        ))
-      ) : (
-        <div></div>
-      )}
+    <div style={{ width: "300px", height: "400px" }}>
       <div
         style={{
-          position: "absolute ",
-          bottom: "1px",
-          left: "0px",
-          right: "0px",
+          backgroundColor: "#282c34",
+          border: "1px solid black",
           display: "block",
-          paddingLeft: "2px",
-          paddingRight: "2px",
+          width: "300px",
+          height: "400px",
+          // maxWidth: "70%",
+          overflowY: "scroll",
+          //overflow: "scroll",
         }}
       >
+        {chats.length !== 0 ? (
+          chats.map((c) => (
+            <Message
+              content={c.content}
+              name={c.name}
+              key={c.content}
+              isMe={c.uid === auth.currentUser.uid}
+            ></Message>
+          ))
+        ) : (
+          <div></div>
+        )}
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
+            position: "absolute",
+
+            bottom: "0px",
+            display: "block",
+            paddingLeft: "2px",
+            paddingRight: "2px",
+          }}
+        ></div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Input
+          style={{}}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="enter message"
+        ></Input>
+        <Button
+          onClick={() => {
+            setChats(chats);
+            db.collection("chatRooms")
+              .doc(ChatRoomId)
+              .update({
+                chats: [
+                  ...chats,
+                  {
+                    uid: auth.currentUser.uid,
+                    name: auth.currentUser.displayName,
+                    content: message,
+                  },
+                ],
+              });
           }}
         >
-          <Input
-            style={{
-              width: "70%",
-            }}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="enter message"
-          ></Input>
-          <Button
-            onClick={() => {
-              setChats(chats);
-              db.collection("chatRooms")
-                .doc(ChatRoomId)
-                .update({
-                  chats: [
-                    ...chats,
-                    {
-                      uid: auth.currentUser.uid,
-                      name: auth.currentUser.displayName,
-                      content: message,
-                    },
-                  ],
-                });
-            }}
-          >
-            Send
-          </Button>
-        </div>
+          Send
+        </Button>
       </div>
     </div>
   );
@@ -118,7 +117,7 @@ function Message({ content, name, isMe }) {
       >
         <Text
           style={{
-            fontSize: "120px",
+            fontSize: "12px",
             color: "white",
             fontWeight: "bold",
           }}

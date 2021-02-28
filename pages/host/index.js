@@ -23,19 +23,15 @@ export default function Host() {
 
   return (
     <div>
-      <h1>{roomId}</h1>
-      <Row 
-      style={{
-        paddingRight:"20vw",
-      }}
+      <h1>Room Id : {roomId}</h1>
+      <p>Share This To Your Friend </p>
+      <div
+        style={{
+          paddingRight: "20vw",
+        }}
       >
-        <Col span={6} pull={6}>
-          {roomId}
-        </Col>
-        <Col span={18} push={6}>
-          <ChatBox ChatRoomId={chatRoomId}></ChatBox>
-        </Col>
-      </Row>
+        <ChatBox ChatRoomId={chatRoomId}></ChatBox>
+      </div>
     </div>
   );
 }
