@@ -42,9 +42,14 @@ export default function ChatBox({ ChatRoomId }) {
       )}
       <div>
         <Input
+        style={{
+          marginLeft: "20vw",
+        marginTop: "70px",
+        width:"35vw"
+        }}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="enter message"
+          placeholder="Enter message"
         ></Input>
         <Button
           onClick={() => {
@@ -73,8 +78,8 @@ export default function ChatBox({ ChatRoomId }) {
 function Message({ content, name, isMe }) {
   return (
     <Row justify={isMe ? "end" : "start"}>
-      <Col span={4}>
-        <Text>{content}</Text>
+      <Col span={3}>
+        <Text>{content+" "}</Text>
         <Text type="secondary">{name}</Text>
       </Col>
     </Row>
