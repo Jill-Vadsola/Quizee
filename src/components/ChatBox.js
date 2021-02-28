@@ -27,7 +27,17 @@ export default function ChatBox({ ChatRoomId }) {
     };
   }, [ChatRoomId]);
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#282c34",
+        border: "1px solid black",
+        width: "300px",
+        height: "400px",
+        maxWidth: "70%",
+        overflowY: "scroll",
+        //overflow: "scroll",
+      }}
+    >
       {chats.length !== 0 ? (
         chats.map((c) => (
           <Message
@@ -40,31 +50,51 @@ export default function ChatBox({ ChatRoomId }) {
       ) : (
         <div></div>
       )}
-      <div>
-        <Input
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="enter message"
-        ></Input>
-        <Button
-          onClick={() => {
-            setChats(chats);
-            db.collection("chatRooms")
-              .doc(ChatRoomId)
-              .update({
-                chats: [
-                  ...chats,
-                  {
-                    uid: auth.currentUser.uid,
-                    name: auth.currentUser.displayName,
-                    content: message,
-                  },
-                ],
-              });
+      <div
+        style={{
+          position: "sticky",
+          bottom: "1px",
+          left: "0px",
+          right: "0px",
+          display: "block",
+          paddingLeft: "2px",
+          paddingRight: "2px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          Send
-        </Button>
+          <Input
+            style={{
+              width: "70%",
+            }}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="enter message"
+          ></Input>
+          <Button
+            onClick={() => {
+              setChats(chats);
+              db.collection("chatRooms")
+                .doc(ChatRoomId)
+                .update({
+                  chats: [
+                    ...chats,
+                    {
+                      uid: auth.currentUser.uid,
+                      name: auth.currentUser.displayName,
+                      content: message,
+                    },
+                  ],
+                });
+            }}
+          >
+            Send
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -73,9 +103,38 @@ export default function ChatBox({ ChatRoomId }) {
 function Message({ content, name, isMe }) {
   return (
     <Row justify={isMe ? "end" : "start"}>
-      <Col span={4}>
-        <Text>{content}</Text>
-        <Text type="secondary">{name}</Text>
+      <Col
+        span={10}
+        style={{
+          maxWidth: "60%",
+          padding: "10px",
+
+          backgroundColor: "rgb(58, 58, 58)",
+          borderRadius: "10px",
+          color: "white",
+          marginTop: "10px",
+          marginBottom: "10px",
+        }}
+      >
+        <Text
+          style={{
+            fontSize: "12px",
+            color: "white",
+            fontWeight: "bold",
+          }}
+        >
+          {content}
+        </Text>
+        <Text
+          style={{
+            color: "wheat",
+            fontSize: "10px",
+            display: "block",
+          }}
+          type="secondary"
+        >
+          {name}
+        </Text>
       </Col>
     </Row>
   );
