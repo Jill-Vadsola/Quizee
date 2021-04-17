@@ -7,6 +7,7 @@ export default function ChatBox({ ChatRoomId }) {
   const [chats, setChats] = useState([]);
   const [message, setMessage] = useState("");
   useEffect(() => {
+    console.log(ChatRoomId);
     if (!ChatRoomId) {
       return;
     }

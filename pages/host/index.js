@@ -1,24 +1,19 @@
 import { Row, Col } from "antd";
 import { useState, useEffect } from "react";
 import ChatBox from "../../src/components/ChatBox";
-import { auth, db } from "../../src/config/firebaseConfig";
+import createRoom from "../../src/config/CreateRoom";
+import CreateRoom from "../../src/config/CreateRoom";
 export default function Host() {
   const [roomId, setRoomId] = useState("");
   const [chatRoomId, setChatRoomId] = useState("");
+
   useEffect(() => {
-    const createRoom = async () => {
-      let chatroomRef = await db.collection("chatRooms").add({
-        chats: [],
-      });
-      setChatRoomId(chatroomRef.id);
-      let gameRoomRef = await db.collection("gameRoom").add({
-        chatRoomId: chatroomRef.id,
-        playersData: [{ name: "shreyansh", id: "xanxhuasnxhuasn" }],
-      });
-      setRoomId(gameRoomRef.id);
-      console.log(roomId);
+    const MakeRoom = async () => {
+      const { gameRoomId, chatRoomId } = await createRoom("Custom");
+      setChatRoomId(chatRoomId);
+      setRoomId(gameRoomId);
     };
-    createRoom();
+    MakeRoom();
   }, []);
 
   return (

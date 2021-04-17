@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import ChatBox from "../../src/components/ChatBox";
 import { auth, db } from "../../src/config/firebaseConfig";
+import firebase from "firebase";
+import JoinRoom from "../../src/config/JoinRoom";
+
 export default function Join() {
   const [roomCode, setRoomCode] = useState("");
   const [isConnected, setIsConnected] = useState(false);
   const [roomCodeInput, setRoomCodeInput] = useState("");
   const [chatRoomCode, setChatRoomCode] = useState("");
+
   useEffect(() => {
     const connectRoom = async () => {
       if (roomCode !== "") {
-        let gameRoomData = await db.collection("gameRoom").doc(roomCode).get();
-
-        setChatRoomCode(gameRoomData.data().chatRoomId);
+        const chatId = await JoinRoom(roomCode);
+        setChatRoomCode(chatId);
         setIsConnected(true);
       }
     };
