@@ -9,12 +9,14 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useEffect } from "react";
 import { auth } from "../config/firebaseConfig";
+import Link from "next/link";
 export default function App() {
   const router = useRouter();
   const [links, setLinks] = useState();
 
   const nonAuthButtons = [
     <Button
+      key="mmmmmmxasxaxm"
       onClick={(e) => {
         router.push("/signup");
       }}
@@ -22,6 +24,7 @@ export default function App() {
       SignUp
     </Button>,
     <Button
+      key="axasxas"
       type="primary"
       onClick={(e) => {
         router.push("/login");
@@ -32,6 +35,7 @@ export default function App() {
   ];
   const AuthButtons = [
     <Button
+      key="222"
       type="primary"
       danger
       onClick={(e) => {
@@ -54,7 +58,7 @@ export default function App() {
   return (
     <PageHeader
       className="site-page-header"
-      title="Quizee"
+      title={<a href="/">Quizee</a>}
       extra={links}
       subTitle="The Online Multiplayer Quiz Game"
     ></PageHeader>

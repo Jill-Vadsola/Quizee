@@ -8,6 +8,7 @@ export default function Quiz({
   gameRoomId,
   quizState = false,
   hasTime = false,
+  queMultiplier = 3,
 }) {
   const router = useRouter();
   const [quizData, setQuizData] = useState(false);
@@ -85,7 +86,7 @@ export default function Quiz({
 
     console.log(currentQueNumber);
     //check if it's last number
-    if (currentQueNumber === 9) {
+    if (currentQueNumber === queMultiplier * 5 - 1) {
       setQuizOver(true);
       if (!hasTime) {
         console.log(hasTime);

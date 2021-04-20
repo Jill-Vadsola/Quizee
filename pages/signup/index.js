@@ -9,11 +9,12 @@ import {
   Button,
   AutoComplete,
   DatePicker,
+  Alert,
 } from "antd";
 const { Option } = AutoComplete;
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { auth } from "../../src/config/firebaseConfig";
+import { auth, db } from "../../src/config/firebaseConfig";
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -43,6 +44,7 @@ const RegistrationForm = () => {
   const router = useRouter();
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
+      console.log(user);
       if (user) {
         router.push("/");
       }
@@ -75,7 +77,14 @@ const RegistrationForm = () => {
           .updateProfile({
             displayName: username,
           })
-          .then(() => {
+          .then(async () => {
+            await db.collection("users").doc(result.user.uid).set({
+              birthdate: bady,
+              CasualGamesPlayed: 0,
+              CasualamesWin: 0,
+              CompetitiveGamesPlayed: 0,
+              CompetitiveGamesWin: 0,
+            });
             router.push("/");
           });
       })

@@ -4,16 +4,29 @@ import { Descriptions, Divider } from "antd";
 import Icon from "@ant-design/icons";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { auth } from "../src/config/firebaseConfig";
+import { auth, db } from "../src/config/firebaseConfig";
 import { useState, useEffect } from "react";
 
 export default function Home() {
   const [isauth, setIsAuth] = useState(false);
+  const [userData, setUserData] = useState({
+    CasualGamesPlayed: 0,
+    CasualamesWin: 0,
+    CompetitiveGamesPlayed: 0,
+    CompetitiveGamesWin: 0,
+  });
 
   const style = { background: "#0092ff", padding: "8px 0" };
   useEffect(() => {
+    const getUserData = async () => {
+      const user = await (
+        await db.collection("users").doc(auth.currentUser.uid).get()
+      ).data();
+      setUserData(user);
+    };
     auth.onAuthStateChanged((user) => {
       if (user) {
+        getUserData();
         setIsAuth(true);
       } else {
         setIsAuth(false);
@@ -33,16 +46,23 @@ export default function Home() {
             <Divider></Divider>
 
             <Descriptions
+              key="xasxaxa"
               bordered
               title={auth.currentUser.providerData[0].displayName}
-              column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+              column={{ md: 4, sm: 2, xs: 1 }}
             >
-              <Descriptions.Item label="competitive matches">
-                7
+              <Descriptions.Item key="qas" label="competitive matches Played">
+                {userData.CompetitiveGamesPlayed}
               </Descriptions.Item>
-              <Descriptions.Item label="Winrate">80%</Descriptions.Item>
-              <Descriptions.Item label="Rank">Silver 1</Descriptions.Item>
-              <Descriptions.Item label="Best Catagory">Geo</Descriptions.Item>
+              <Descriptions.Item key="qqqa" label="competitive matches win">
+                {userData.CompetitiveGamesWin}
+              </Descriptions.Item>
+              <Descriptions.Item key="sda" label="casual matches Played">
+                {userData.CasualGamesPlayed}
+              </Descriptions.Item>
+              <Descriptions.Item key="wa" label="casual matches win">
+                {userData.CasualamesWin}
+              </Descriptions.Item>
             </Descriptions>
             <Divider></Divider>
           </div>
@@ -58,24 +78,28 @@ export default function Home() {
           }}
         >
           <CardForGameMode
+            key="qa"
             imagePath="/images/casual.svg"
             name="Casual"
-            RedirectPath="/casual"
+            RedirectPath={isauth ? "/casual" : "/signup"}
           ></CardForGameMode>
           <CardForGameMode
+            key="a"
             imagePath="/images/competitive.svg"
             name="Competitive"
-            RedirectPath="/competitive"
+            RedirectPath={isauth ? "/competitive" : "/signup"}
           ></CardForGameMode>
           <CardForGameMode
+            key="as"
             imagePath="/images/host.svg"
             name="Host Game"
-            RedirectPath="/host"
+            RedirectPath={isauth ? "/host" : "/signup"}
           ></CardForGameMode>
           <CardForGameMode
+            key="aa"
             imagePath="/images/join.svg"
             name="Join Game"
-            RedirectPath="/join"
+            RedirectPath={isauth ? "/join" : "/signup"}
           ></CardForGameMode>
         </div>
       </div>

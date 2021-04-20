@@ -2,24 +2,31 @@ import React, { useEffect, useState, useMemo } from "react";
 import ChatBox from "../../src/components/ChatBox";
 import MatchQueue from "../../src/config/QueueMatch";
 import Quiz from "../../src/components/quiz";
-import { db } from "../../src/config/firebaseConfig";
+import { auth, db } from "../../src/config/firebaseConfig";
 import Leaderbord from "../../src/components/LeaderBord";
 import Timer from "../../src/components/timer";
+import firebase from "firebase";
 export default function Casual() {
   const [gameRoomId, setGameRoomId] = useState("");
   const [chatRoomIdm, setChatRoomId] = useState("");
   const [quizState, setQuizState] = useState(false);
-  const hasTime = false;
-  const overTime = 15;
-
+  const hasTime = true;
+  const overTime = 30;
+  const playerCount = 3;
+  const questionMultiplier = 4;
   useEffect(() => {
     const Match = async () => {
-      const [chatRoomId, gameRoomId] = await MatchQueue("Competitive", 3);
+      const [chatRoomId, gameRoomId] = await MatchQueue(
+        "Competitive",
+        questionMultiplier,
+        playerCount
+      );
       setGameRoomId(gameRoomId);
       setChatRoomId(chatRoomId);
     };
     Match();
   }, []);
+
   useEffect(() => {
     if (gameRoomId === "") {
       return;
@@ -45,13 +52,28 @@ export default function Casual() {
   }, [gameRoomId]);
   const onWin = () => {
     //DO Something When Win to db
+    db.collection("users")
+      .doc(auth.currentUser.uid)
+      .update({
+        CompetitiveGamesPlayed: firebase.firestore.FieldValue.increment(1),
+        CompetitiveGamesWin: firebase.firestore.FieldValue.increment(1),
+      });
   };
   const onLoose = () => {
     //Do Something When Loose to db
+
+    db.collection("users")
+      .doc(auth.currentUser.uid)
+      .update({
+        CompetitiveGamesPlayed: firebase.firestore.FieldValue.increment(1),
+      });
   };
   return (
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-      <h3>Answer All questions Before Everyone To Win</h3>
+      <h3>
+        Answer All {questionMultiplier * 5} questions Before Timer Runs Out To
+        Win
+      </h3>
       <ChatBox ChatRoomId={chatRoomIdm} key="1"></ChatBox>
       {hasTime && (
         <Timer
@@ -62,6 +84,7 @@ export default function Casual() {
         ></Timer>
       )}
       <Quiz
+        queMultiplier={questionMultiplier}
         gameRoomId={gameRoomId}
         quizState={quizState}
         hasTime={hasTime}

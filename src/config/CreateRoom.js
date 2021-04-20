@@ -31,12 +31,12 @@ export default createRoom;
 function GenrateQuestions(numberQues) {
   const arr = [];
   for (let i = 0; i < numberQues; i++) {
-    const rand = Math.floor(Math.random() * 10)+ 1;
+    const rand = Math.floor(Math.random() * 10) + 1;
     if (arr.length === 0) {
       arr.push(rand);
       continue;
     }
-    if (arr[arr.length - 1] === rand) {
+    if (arr[i - 1] === rand) {
       if (rand === 9) {
         arr.push(8);
       } else {

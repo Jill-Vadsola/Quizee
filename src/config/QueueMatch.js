@@ -3,13 +3,17 @@ import createRoom from "./CreateRoom";
 import JoinRoom from "./JoinRoom";
 import firebase from "firebase";
 
-export default async function MatchQueue(type = "Casual", playerLimit = 3) {
+export default async function MatchQueue(
+  type = "Casual",
+  queCounts = 2,
+  playerLimit = 3
+) {
   const queurRef = db.collection("queue").doc(type);
   const data = await (await queurRef.get()).data();
   console.log(data);
   if (data.rooms === undefined || data.rooms.length === 0) {
     //if room queue is empty
-    const roomData = await createRoom(type);
+    const roomData = await createRoom(type, queCounts * 5);
     queurRef.set({
       rooms: [roomData],
     });

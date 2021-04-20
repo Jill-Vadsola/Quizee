@@ -3,7 +3,8 @@ import firebase from "firebase";
 
 const JoinRoom = async (roomCode) => {
   let gameRoomData = await db.collection("gameRoom").doc(roomCode).get();
-  db.collection("gameRoom")
+  await db
+    .collection("gameRoom")
     .doc(roomCode)
     .update({
       playersData: firebase.firestore.FieldValue.arrayUnion({
