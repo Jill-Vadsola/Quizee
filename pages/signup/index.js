@@ -8,11 +8,14 @@ import {
   Col,
   Button,
   AutoComplete,
+  ConfigProvider,
   DatePicker,
   Alert,
 } from "antd";
+import local from "moment/locale/en-in";
 const { Option } = AutoComplete;
 import { useRouter } from "next/router";
+import moment from "moment";
 import { useState, useEffect } from "react";
 import { auth, db } from "../../src/config/firebaseConfig";
 const formItemLayout = {
@@ -196,6 +199,12 @@ const RegistrationForm = () => {
         ]}
       >
         <DatePicker
+          locale={local}
+          defaultPickerValue={moment("09-10-2000", "dd-mm-yyyy")}
+          disabledTime={function (current) {
+            alert(current && current.valueOf() < Date.now());
+            return current && current.valueOf() < Date.now();
+          }}
           onChange={(e, x) => {
             setBday(x);
           }}
