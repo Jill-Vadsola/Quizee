@@ -6,7 +6,7 @@ import CreateRoom from "../../src/config/CreateRoom";
 export default function Host() {
   const [roomId, setRoomId] = useState("");
   const [chatRoomId, setChatRoomId] = useState("");
-
+  const [started, setStarted] = useState(false);
   useEffect(() => {
     const MakeRoom = async () => {
       const { gameRoomId, chatRoomId } = await createRoom("Custom");

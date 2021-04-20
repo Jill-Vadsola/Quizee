@@ -7,11 +7,11 @@ export default function ChatBox({ ChatRoomId }) {
   const [chats, setChats] = useState([]);
   const [message, setMessage] = useState("");
   useEffect(() => {
-    console.log(ChatRoomId);
     if (!ChatRoomId) {
       return;
     }
-    let unsubscribe = db
+
+    const unsub = db
       .collection("chatRooms")
       .doc(ChatRoomId)
       .onSnapshot((snapshot) => {
@@ -20,15 +20,21 @@ export default function ChatBox({ ChatRoomId }) {
         }
 
         setChats(snapshot.data().chats);
-        console.log(snapshot.data());
       });
 
     return () => {
-      unsubscribe();
+      unsub();
     };
   }, [ChatRoomId]);
   return (
-    <div style={{ width: "300px", height: "400px" }}>
+    <div
+      style={{
+        marginRight: "20px",
+        margin: "20px",
+        width: "300px",
+        height: "400px",
+      }}
+    >
       <div
         style={{
           backgroundColor: "#282c34",
@@ -55,7 +61,7 @@ export default function ChatBox({ ChatRoomId }) {
         )}
         <div
           style={{
-            position: "absolute",
+            position: "",
 
             bottom: "0px",
             display: "block",

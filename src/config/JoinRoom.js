@@ -12,7 +12,7 @@ const JoinRoom = async (roomCode) => {
         score: 0,
       }),
     });
-  return gameRoomData.data().chatRoomId;
+  return await gameRoomData.data().chatRoomId;
 };
 
 export default JoinRoom;

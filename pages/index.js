@@ -15,7 +15,6 @@ export default function Home() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setIsAuth(true);
-        console.log(auth.currentUser);
       } else {
         setIsAuth(false);
       }
