@@ -11,9 +11,14 @@ export default function Casual() {
   const [gameRoomId, setGameRoomId] = useState("");
   const [chatRoomIdm, setChatRoomId] = useState("");
   const [quizState, setQuizState] = useState(false);
+
+  //For Future Use (without counter Games)
   const hasTime = true;
+  //Time Limit
   const overTime = 15;
+  //Automatically start when player count matched
   const playerCount = 3;
+  //Number Of Questions Asked in Round
   const questionMultiplier = 3;
   useEffect(() => {
     const Match = async () => {
