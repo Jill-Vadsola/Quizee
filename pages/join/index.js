@@ -68,14 +68,6 @@ export default function Join() {
         </div>
       ) : (
         <div>
-          <ChatBox ChatRoomId={chatRoomCode}></ChatBox>
-          <Leaderbord
-            gameRoomId={roomCode}
-            timeBased={true}
-            key="a"
-            onWin={() => {}}
-            onLoose={() => {}}
-          ></Leaderbord>
           {gameStarted ? (
             <div>
               <Timer
@@ -93,8 +85,16 @@ export default function Join() {
               ></Quiz>
             </div>
           ) : (
-            <></>
+            <h3>Waiting for Host To Start Game</h3>
           )}
+          <ChatBox ChatRoomId={chatRoomCode}></ChatBox>
+          <Leaderbord
+            gameRoomId={roomCode}
+            timeBased={true}
+            key="a"
+            onWin={() => {}}
+            onLoose={() => {}}
+          ></Leaderbord>
         </div>
       )}
     </div>
