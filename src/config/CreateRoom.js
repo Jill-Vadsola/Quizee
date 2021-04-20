@@ -19,7 +19,7 @@ const createRoom = async (type, numberQues = 10) => {
       },
     ],
   });
-  console.log(chatroomRef);
+
   return {
     gameRoomId: gameRoomRef.id,
     chatRoomId: chatroomRef.id,

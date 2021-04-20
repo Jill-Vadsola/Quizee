@@ -50,19 +50,21 @@ export default function Casual() {
       } catch {}
     };
   }, [gameRoomId]);
-  const onWin = () => {
+  const onWin = async () => {
     //DO Something When Win to db
-    db.collection("users")
+    await db
+      .collection("users")
       .doc(auth.currentUser.uid)
       .update({
         CompetitiveGamesPlayed: firebase.firestore.FieldValue.increment(1),
         CompetitiveGamesWin: firebase.firestore.FieldValue.increment(1),
       });
   };
-  const onLoose = () => {
+  const onLoose = async () => {
     //Do Something When Loose to db
 
-    db.collection("users")
+    await db
+      .collection("users")
       .doc(auth.currentUser.uid)
       .update({
         CompetitiveGamesPlayed: firebase.firestore.FieldValue.increment(1),
