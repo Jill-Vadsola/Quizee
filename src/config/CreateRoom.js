@@ -31,7 +31,7 @@ export default createRoom;
 function GenrateQuestions(numberQues) {
   const arr = [];
   for (let i = 0; i < numberQues; i++) {
-    const rand = Math.ceil(Math.random() * 10);
+    const rand = Math.floor(Math.random() * 10)+ 1;
     if (arr.length === 0) {
       arr.push(rand);
       continue;

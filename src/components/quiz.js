@@ -25,12 +25,13 @@ export default function Quiz({
     if (gameRoomId === "") {
       return;
     }
-    
+
     const unsub = db
       .collection("gameRoom")
       .doc(gameRoomId)
-      .onSnapshot((e) => {
-        if (e.data().state === "Ended") {
+      .onSnapshot(async (e) => {
+        console.log(e.state);
+        if ((await e.data().state) === "Ended") {
           setQuizOver(true);
         }
       });
@@ -81,10 +82,14 @@ export default function Quiz({
         playersData: newPlayersData,
       });
     }
+
+    console.log(currentQueNumber);
     //check if it's last number
     if (currentQueNumber === 9) {
       setQuizOver(true);
       if (!hasTime) {
+        console.log(hasTime);
+
         await db.collection("gameRoom").doc(gameRoomId).update({
           state: "Ended",
         });

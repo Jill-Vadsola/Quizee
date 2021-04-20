@@ -9,12 +9,12 @@ export default function Casual() {
   const [gameRoomId, setGameRoomId] = useState("");
   const [chatRoomIdm, setChatRoomId] = useState("");
   const [quizState, setQuizState] = useState(false);
-  const hasTime = true;
+  const hasTime = false;
   const overTime = 15;
 
   useEffect(() => {
     const Match = async () => {
-      const [chatRoomId, gameRoomId] = await MatchQueue("Casual", 3);
+      const [chatRoomId, gameRoomId] = await MatchQueue("Competitive", 3);
       setGameRoomId(gameRoomId);
       setChatRoomId(chatRoomId);
     };
@@ -51,7 +51,7 @@ export default function Casual() {
   };
   return (
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-      <h3>Answer All questions correctly in 15 seconds to win</h3>
+      <h3>Answer All questions Before Everyone To Win</h3>
       <ChatBox ChatRoomId={chatRoomIdm} key="1"></ChatBox>
       {hasTime && (
         <Timer
