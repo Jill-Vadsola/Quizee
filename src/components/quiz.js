@@ -79,7 +79,7 @@ export default function Quiz({
         return e;
       });
 
-      await db.collection("gameRoom").doc(gameRoomId).set({
+      await db.collection("gameRoom").doc(gameRoomId).update({
         playersData: newPlayersData,
       });
     }

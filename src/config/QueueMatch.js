@@ -32,7 +32,7 @@ export default async function MatchQueue(
 
     if ((await gameRoomData.data().playersData.length) >= playerLimit) {
       //if three players joined than close the room for other players
-      await queurRef.set({
+      await queurRef.update({
         rooms: firebase.firestore.FieldValue.arrayRemove({ roomData }),
       });
       //set game room setting to start

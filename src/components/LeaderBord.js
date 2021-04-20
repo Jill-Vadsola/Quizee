@@ -3,7 +3,7 @@ import { auth, db } from "../config/firebaseConfig";
 
 export default function Leaderbord({
   gameRoomId,
-  timeBased = false,
+  timeBased = true,
   onWin,
   onLoose,
 }) {
@@ -17,12 +17,13 @@ export default function Leaderbord({
     const unSub = db
       .collection("gameRoom")
       .doc(gameRoomId)
-      .onSnapshot((e) => {
-        const playerData = e
+      .onSnapshot(async (e) => {
+        const playerData = await e
           .data()
           .playersData.sort((a, b) => b.score - a.score);
         setData(playerData);
-        if (e.data().state === "Ended") {
+
+        if ((await e.data().state) === "Ended") {
           setEnded(true);
           if (
             playerData[0].id == auth.currentUser.uid ||
