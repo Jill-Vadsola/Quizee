@@ -51,16 +51,16 @@ export default function Home() {
               title={auth.currentUser.providerData[0].displayName}
               column={{ md: 4, sm: 2, xs: 1 }}
             >
-              <Descriptions.Item key="qas" label="competitive matches Played">
+              <Descriptions.Item key="qas" label="Competitive matches Played">
                 {userData.CompetitiveGamesPlayed}
               </Descriptions.Item>
-              <Descriptions.Item key="qqqa" label="competitive matches win">
+              <Descriptions.Item key="qqqa" label="Competitive matches win">
                 {userData.CompetitiveGamesWin}
               </Descriptions.Item>
-              <Descriptions.Item key="sda" label="casual matches Played">
+              <Descriptions.Item key="sda" label="Casual matches Played">
                 {userData.CasualGamesPlayed}
               </Descriptions.Item>
-              <Descriptions.Item key="wa" label="casual matches win">
+              <Descriptions.Item key="wa" label="Casual matches win">
                 {userData.CasualamesWin}
               </Descriptions.Item>
             </Descriptions>
