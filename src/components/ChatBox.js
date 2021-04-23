@@ -80,7 +80,7 @@ export default function ChatBox({ ChatRoomId }) {
           style={{}}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="enter message"
+          placeholder="Enter message"
         ></Input>
         <Button
           onClick={() => {
