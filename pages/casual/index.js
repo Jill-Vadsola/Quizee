@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { Button, Col, Input, Row, Typography } from "antd";
 import ChatBox from "../../src/components/ChatBox";
 import MatchQueue from "../../src/config/QueueMatch";
 import Quiz from "../../src/components/quiz";
@@ -74,12 +75,32 @@ export default function Casual() {
       });
   };
   return (
-    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-      <h3>
+    <div
+    style={{
+      backgroundColor:"rgba(187,147,83,0.85)",
+      width:"100%",
+      height:"680px"
+    }}>
+      <h2
+      style={{marginLeft:"15px"}}>
         Answer All {questionMultiplier * 5} questions Before Timer Runs Out To
         Win
-      </h3>
-      <ChatBox ChatRoomId={chatRoomIdm} key="1"></ChatBox>
+      </h2>
+      <Row>
+        <Col style={{position:"relative",top:"1vw"}}>
+          <ChatBox ChatRoomId={chatRoomIdm} key="1"></ChatBox>
+        </Col>
+        <Row style={{padding: "10px",marginTop:"20px"}}>
+        <Quiz
+        queMultiplier={questionMultiplier}
+        gameRoomId={gameRoomId}
+        quizState={quizState}
+        hasTime={hasTime}
+        key="10"
+      ></Quiz>{" "}
+      <Col>
+      <Row style={{padding: "10px",
+      marginLeft:"50vw"}}>
       {hasTime && (
         <Timer
           key="555"
@@ -88,13 +109,10 @@ export default function Casual() {
           overTime={overTime}
         ></Timer>
       )}
-      <Quiz
-        queMultiplier={questionMultiplier}
-        gameRoomId={gameRoomId}
-        quizState={quizState}
-        hasTime={hasTime}
-        key="10"
-      ></Quiz>{" "}
+      </Row>
+      <Row
+      style={{padding: "10px",
+      marginLeft:"50vw"}}>
       <Leaderbord
         gameRoomId={gameRoomId}
         timeBased={hasTime}
@@ -102,6 +120,10 @@ export default function Casual() {
         onWin={onWin}
         onLoose={onLoose}
       ></Leaderbord>
+      </Row>
+      </Col>
+      </Row>
+      </Row>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { GenrateQuestions } from "../config/GenrateQuestions";
 import { useRouter } from "next/router";
 import { useTimer } from "use-timer";
 
+
 export default function Quiz({
   gameRoomId,
   quizState = false,
