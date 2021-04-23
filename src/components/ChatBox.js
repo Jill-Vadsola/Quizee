@@ -61,7 +61,7 @@ export default function ChatBox({ ChatRoomId }) {
         )}
         <div
           style={{
-            position: "",
+            position: "relative",
 
             bottom: "0px",
             display: "block",

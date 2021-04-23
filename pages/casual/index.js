@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Button, Col, Input, Row, Typography } from "antd";
 import ChatBox from "../../src/components/ChatBox";
 import MatchQueue from "../../src/config/QueueMatch";
 import Quiz from "../../src/components/quiz";
@@ -16,7 +15,7 @@ export default function Casual() {
   //For Future Use (without counter Games)
   const hasTime = true;
   //Time Limit
-  const overTime = 15;
+  const overTime = 15000;
   //Automatically start when player count matched
   const playerCount = 3;
   //Number Of Questions Asked in Round
@@ -77,7 +76,7 @@ export default function Casual() {
   return (
     <div
       style={{
-        backgroundColor: "rgba(187,147,83,0.85)",
+        backgrounddivor: "rgba(187,147,83,0.85)",
         width: "100%",
         height: "680px",
       }}
@@ -86,11 +85,25 @@ export default function Casual() {
         Answer All {questionMultiplier * 5} questions Before Timer Runs Out To
         Win
       </h2>
-      <Row>
-        <Col style={{ position: "relative", top: "1vw" }}>
-          <ChatBox ChatRoomId={chatRoomIdm} key="1"></ChatBox>
-        </Col>
-        <Row style={{ padding: "10px", marginTop: "20px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          {hasTime && (
+            <Timer
+              key="555"
+              gameRoomId={gameRoomId}
+              quizState={quizState}
+              overTime={overTime}
+            ></Timer>
+          )}
+          <Leaderbord
+            gameRoomId={gameRoomId}
+            timeBased={hasTime}
+            key="a"
+            onWin={onWin}
+            onLoose={onLoose}
+          ></Leaderbord>
+        </div>
+        <div>
           <Quiz
             queMultiplier={questionMultiplier}
             gameRoomId={gameRoomId}
@@ -98,29 +111,12 @@ export default function Casual() {
             hasTime={hasTime}
             key="10"
           ></Quiz>{" "}
-          <Col>
-            <Row style={{ padding: "10px", marginLeft: "50vw" }}>
-              {hasTime && (
-                <Timer
-                  key="555"
-                  gameRoomId={gameRoomId}
-                  quizState={quizState}
-                  overTime={overTime}
-                ></Timer>
-              )}
-            </Row>
-            <Row style={{ padding: "10px", marginLeft: "50vw" }}>
-              <Leaderbord
-                gameRoomId={gameRoomId}
-                timeBased={hasTime}
-                key="a"
-                onWin={onWin}
-                onLoose={onLoose}
-              ></Leaderbord>
-            </Row>
-          </Col>
-        </Row>
-      </Row>
+        </div>
+
+        <div>
+          <ChatBox ChatRoomId={chatRoomIdm} key="1"></ChatBox>
+        </div>
+      </div>
     </div>
   );
 }
