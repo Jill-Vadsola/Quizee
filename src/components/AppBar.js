@@ -57,10 +57,12 @@ export default function App() {
 
   return (
     <PageHeader
+    style={{backgroundColor:"rgb(44,44,52,0.95)"}}
       className="site-page-header"
       title={<a href="/">Quizee</a>}
       extra={links}
       subTitle="The Online Multiplayer Quiz Game"
-    ></PageHeader>
+    >
+    </PageHeader>
   );
 }
