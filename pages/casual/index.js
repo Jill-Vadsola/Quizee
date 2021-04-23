@@ -77,7 +77,7 @@ export default function Casual() {
   return (
     <div
       style={{
-        backgrounddivor: "rgba(187,147,83,0.85)",
+        backgroundColor: "rgba(187,147,83,0.85)",
         width: "100%",
         height: "680px",
         overflowY: "hidden",

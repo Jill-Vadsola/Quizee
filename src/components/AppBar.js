@@ -40,6 +40,7 @@ export default function App() {
       danger
       onClick={(e) => {
         auth.signOut();
+        // router.push("/");
       }}
     >
       SignOut
@@ -57,12 +58,15 @@ export default function App() {
 
   return (
     <PageHeader
-    style={{backgroundColor:"rgb(44,44,52,0.95)"}}
+      style={{ backgroundColor: "rgb(44,44,52,0.95)" }}
       className="site-page-header"
       title={<a href="/">Quizee</a>}
       extra={links}
-      subTitle={<span style={{color:"whitesmoke"}}>The Online Multiplayer Quiz Game</span>}
-    >
-    </PageHeader>
+      subTitle={
+        <span style={{ color: "whitesmoke" }}>
+          The Online Multiplayer Quiz Game
+        </span>
+      }
+    ></PageHeader>
   );
 }
