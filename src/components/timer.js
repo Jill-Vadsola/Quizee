@@ -19,5 +19,7 @@ export default function Timer({ overTime, quizState, gameRoomId }) {
       start();
     }
   }, [quizState]);
-  return <div>Time Remaining:{time} Seconds</div>;
+  return (
+    <div style={{ fontWeight: "bolder" }}>Time Remaining:{time} Seconds</div>
+  );
 }

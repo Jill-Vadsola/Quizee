@@ -41,23 +41,42 @@ export default function Leaderbord({
     };
   }, [gameRoomId]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
   return (
-    <div>
+    <div
+      style={{
+        margin: "7px",
+      }}
+    >
       {ended && <div>{winner ? "Winner" : "Better Luck Next Time"}</div>}
 
-      <table>
+      <table
+        style={{
+          tableLayout: "fixed",
+          width: "300px",
+          padding: "3px",
+          textAlign: "center",
+          border: "1px solid black",
+        }}
+      >
         <tbody>
-          <tr>
-            <th>Name</th>
+          <tr style={{ border: "1px solid black" }}>
+            <th style={{ borderRight: "1px solid black" }}>Name</th>
             <th>Score</th>
           </tr>
           {data.map((e, idx) => {
             return (
-              <tr>
-                <td>{e.name}</td>
+              <tr style={{ border: "1px solid black" }}>
+                <td
+                  style={{
+                    width: "70px",
+                    height: "30px",
+                    borderRight: "1px solid black",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                  }}
+                >
+                  {e.name}
+                </td>
                 <td>{e.score}</td>
               </tr>
             );

@@ -4,7 +4,7 @@ import { GenrateQuestions } from "../config/GenrateQuestions";
 import { useRouter } from "next/router";
 import { useTimer } from "use-timer";
 import Grid from "antd/lib/card/Grid";
-
+import styles from "../style/hover.module.css";
 export default function Quiz({
   gameRoomId,
   quizState = false,
@@ -64,6 +64,7 @@ export default function Quiz({
       setCurrentOptions(currentData.o);
       setCurrentAnswer(currentData.a);
       setCurrentQue(currentData.q);
+      setCurrentQueNumber(currentQueNumber + 1);
     }
   }, [quizData]);
 
@@ -123,7 +124,6 @@ export default function Quiz({
             </div>
             <div
               style={{
-                "&:hover": { backgroundColor: "lightgreen" },
                 justifyContent: "center",
                 display: "grid",
                 gridTemplateRows: "auto auto",
@@ -132,6 +132,7 @@ export default function Quiz({
               }}
             >
               <div
+                className={styles.quizOptionx}
                 style={{
                   padding: "20px",
 
@@ -147,9 +148,10 @@ export default function Quiz({
                   NextQuestion(currentOptions[0]);
                 }}
               >
-                {currentOptions[0]}
+                <span>{currentOptions[0]}</span>
               </div>
               <div
+                className={styles.quizOptionx}
                 style={{
                   padding: "20px",
 
@@ -169,9 +171,9 @@ export default function Quiz({
               </div>
 
               <div
+                className={styles.quizOptionx}
                 style={{
                   padding: "20px",
-
                   width: "100%",
                   display: "inline-grid",
                   backgroundColor: "wheat",
@@ -187,6 +189,7 @@ export default function Quiz({
                 {currentOptions[2]}
               </div>
               <div
+                className={styles.quizOptionx}
                 style={{
                   padding: "20px",
 

@@ -22,7 +22,6 @@ export const GenrateQuestions = async (questionNums) => {
         .doc(`${questionNums[n]}`)
         .get()
     ).data();
-    console.log(queD);
     questionsArr.push(queD);
   }
   return questionsArr;

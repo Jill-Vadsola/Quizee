@@ -6,6 +6,7 @@ import { db, auth } from "../../src/config/firebaseConfig";
 import Leaderbord from "../../src/components/LeaderBord";
 import Timer from "../../src/components/timer";
 import firebase from "firebase";
+import { Divider } from "antd";
 import { useRouter } from "next/router";
 export default function Casual() {
   const [gameRoomId, setGameRoomId] = useState("");
@@ -81,20 +82,24 @@ export default function Casual() {
         height: "680px",
       }}
     >
-      <h2 style={{ marginLeft: "15px" }}>
-        Answer All {questionMultiplier * 5} questions Before Timer Runs Out To
-        Win
-      </h2>
+      <div style={{ textAlign: "center" }}>
+        <h2 style={{ marginLeft: "15px" }}>
+          Answer All {questionMultiplier * 5} questions Before Timer Runs Out To
+          Win
+        </h2>
+        <Divider></Divider>
+
+        {hasTime && (
+          <Timer
+            key="555"
+            gameRoomId={gameRoomId}
+            quizState={quizState}
+            overTime={overTime}
+          ></Timer>
+        )}
+      </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
-          {hasTime && (
-            <Timer
-              key="555"
-              gameRoomId={gameRoomId}
-              quizState={quizState}
-              overTime={overTime}
-            ></Timer>
-          )}
           <Leaderbord
             gameRoomId={gameRoomId}
             timeBased={hasTime}
