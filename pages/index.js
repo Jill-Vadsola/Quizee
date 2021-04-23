@@ -35,7 +35,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div style={{
+      backgroundColor:"rgba(187,147,83,25)",
+      width:"100%",
+      height:"auto"
+    }}>
       <Head>
         <title>Quizee</title>
         <link rel="icon"></link>
@@ -46,21 +50,24 @@ export default function Home() {
             <Divider></Divider>
 
             <Descriptions
+            style={{
+              marginLeft:"10px",
+            }}
               key="xasxaxa"
               bordered
               title={auth.currentUser.providerData[0].displayName}
               column={{ md: 4, sm: 2, xs: 1 }}
             >
-              <Descriptions.Item key="qas" label="Competitive matches Played">
+              <Descriptions.Item key="qas" label="Competitive matches Played" style={{backgroundColor:"rgb(255,255,255)"}}>
                 {userData.CompetitiveGamesPlayed}
               </Descriptions.Item>
-              <Descriptions.Item key="qqqa" label="Competitive matches win">
+              <Descriptions.Item key="qqqa" label="Competitive matches win" style={{backgroundColor:"rgb(255,255,255)"}}>
                 {userData.CompetitiveGamesWin}
               </Descriptions.Item>
-              <Descriptions.Item key="sda" label="Casual matches Played">
+              <Descriptions.Item key="sda" label="Casual matches Played" style={{backgroundColor:"rgb(255,255,255)"}}>
                 {userData.CasualGamesPlayed}
               </Descriptions.Item>
-              <Descriptions.Item key="wa" label="Casual matches win">
+              <Descriptions.Item key="wa" label="Casual matches win" style={{backgroundColor:"rgb(255,255,255)"}}>
                 {userData.CasualamesWin}
               </Descriptions.Item>
             </Descriptions>

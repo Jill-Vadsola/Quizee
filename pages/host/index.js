@@ -36,21 +36,31 @@ export default function Host() {
   }
 
   return !roomCreated ? (
-    <div>
-      <h1>Game Settings</h1>
-      <div>
-        <label>Time Limit(Seconds)</label>
-        <InputNumber
+    <div style={{
+      backgroundColor:"rgba(187,147,83,25)",
+      width:"100%",
+      height:"680px"}}>
+    <div 
+    >
+    <table style={{marginLeft:"40%",border: "1px solid black",marginTop:"20px"}}>
+      <tr style={{textAlign:"center",backgroundColor:"rgb(44,44,52,0.95)"}}>
+        <th colspan="2">
+      <h1 style={{color:"whitesmoke"}}>Game Settings</h1>
+      </th>
+      </tr>
+        <tr style={{backgroundColor:"rgb(255,255,255)",border: "1px solid black"}}>
+        <td style={{padding:"10px"}}><label>Time Limit(Seconds)</label></td>
+        <td style={{padding:"10px"}}><InputNumber
           aria-label="Time Limit"
           min={15}
           max={120}
           defaultValue={15}
           onChange={(value) => setTime(value)}
-        />
-      </div>
-      <div>
-        <label>Questions Count : {NumQues}</label>
-        <Slider
+        /></td>
+        </tr>
+        <tr style={{textAlign:"center",backgroundColor:"rgb(255,255,255)",border:"1px solid black"}}>
+        <td style={{padding:"10px"}}><label>Questions Count : {NumQues}</label></td>
+        <td style={{padding:"10px"}}><Slider
           style={{ width: "200px" }}
           key="xas"
           min={5}
@@ -59,8 +69,10 @@ export default function Host() {
           defaultValue={10}
           tipFormatter={formatter}
           onChange={(value) => setNumQues(value)}
-        />
-      </div>
+        /></td>
+        </tr>
+        <tr style={{textAlign:"center",backgroundColor:"rgb(255,255,255)",border: "1px solid black"}}>
+          <td colspan="2" style={{padding:"10px"}}>
       <Button
         onClick={(e) => {
           MakeRoom();
@@ -68,9 +80,17 @@ export default function Host() {
       >
         Complete Setup
       </Button>
+      </td>
+      </tr>
+    </table>
+    </div>
     </div>
   ) : (
-    <div>
+    <div style={{
+      backgroundColor:"rgba(187,147,83,25)",
+      width:"100%",
+      height:"680px"
+    }}>
       {started ? (
         <div>
           <Timer

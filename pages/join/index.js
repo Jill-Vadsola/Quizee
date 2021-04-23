@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { Input } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
+import { Button, Radio } from 'antd';
 import ChatBox from "../../src/components/ChatBox";
 import { auth, db } from "../../src/config/firebaseConfig";
 import firebase from "firebase";
@@ -6,6 +9,7 @@ import JoinRoom from "../../src/config/JoinRoom";
 import Quiz from "../../src/components/quiz";
 import Leaderbord from "../../src/components/LeaderBord";
 import Timer from "../../src/components/timer";
+
 export default function Join() {
   const [roomCode, setRoomCode] = useState("");
   const [isConnected, setIsConnected] = useState(false);
@@ -47,24 +51,30 @@ export default function Join() {
   }, [roomCode]);
 
   return (
-    <div>
+    <div style={{
+      backgroundColor:"rgba(187,147,83,25)",
+      width:"100%",
+      height:"680px"
+    }}>
       {!isConnected ? (
         <div>
           <input
+          style={{position:"relative",left:"45vw",top:"18vw"}}
             placeholder="Enter Room Code"
             value={roomCodeInput}
             onChange={(e) => {
               setRoomCodeInput(e.target.value);
             }}
           ></input>
-          <button
+          <Button type="primary" shape="round" size="large" 
+          style={{position:"relative",left:"37vw",top:"20.5vw"}}
             onClick={(e) => {
               setRoomCode(roomCodeInput);
             }}
           >
             {" "}
             JOIN
-          </button>
+          </Button>
         </div>
       ) : (
         <div>

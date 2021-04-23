@@ -61,7 +61,7 @@ export default function App() {
       className="site-page-header"
       title={<a href="/">Quizee</a>}
       extra={links}
-      subTitle="The Online Multiplayer Quiz Game"
+      subTitle={<span style={{color:"whitesmoke"}}>The Online Multiplayer Quiz Game</span>}
     >
     </PageHeader>
   );

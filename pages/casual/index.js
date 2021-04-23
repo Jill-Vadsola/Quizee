@@ -16,7 +16,7 @@ export default function Casual() {
   //For Future Use (without counter Games)
   const hasTime = true;
   //Time Limit
-  const overTime = 15;
+  const overTime = 15000;
   //Automatically start when player count matched
   const playerCount = 3;
   //Number Of Questions Asked in Round
@@ -87,7 +87,7 @@ export default function Casual() {
         Win
       </h2>
       <Row>
-        <Col style={{position:"relative",top:"1vw"}}>
+        <Col style={{ position:"relative",top:"1vw",display:"inline-block"}}>
           <ChatBox ChatRoomId={chatRoomIdm} key="1"></ChatBox>
         </Col>
         <Row style={{padding: "10px",marginTop:"20px"}}>
