@@ -76,53 +76,50 @@ export default function Casual() {
   };
   return (
     <div
-    style={{
-      backgroundColor:"rgba(187,147,83,0.85)",
-      width:"100%",
-      height:"680px"
-    }}>
-      <h2
-      style={{marginLeft:"15px"}}>
+      style={{
+        backgroundColor: "rgba(187,147,83,0.85)",
+        width: "100%",
+        height: "680px",
+      }}
+    >
+      <h2 style={{ marginLeft: "15px" }}>
         Answer All {questionMultiplier * 5} questions Before Timer Runs Out To
         Win
       </h2>
       <Row>
-        <Col style={{position:"relative",top:"1vw"}}>
+        <Col style={{ position: "relative", top: "1vw" }}>
           <ChatBox ChatRoomId={chatRoomIdm} key="1"></ChatBox>
         </Col>
-        <Row style={{padding: "10px",marginTop:"20px"}}>
-        <Quiz
-        queMultiplier={questionMultiplier}
-        gameRoomId={gameRoomId}
-        quizState={quizState}
-        hasTime={hasTime}
-        key="10"
-      ></Quiz>{" "}
-      <Col>
-      <Row style={{padding: "10px",
-      marginLeft:"50vw"}}>
-      {hasTime && (
-        <Timer
-          key="555"
-          gameRoomId={gameRoomId}
-          quizState={quizState}
-          overTime={overTime}
-        ></Timer>
-      )}
-      </Row>
-      <Row
-      style={{padding: "10px",
-      marginLeft:"50vw"}}>
-      <Leaderbord
-        gameRoomId={gameRoomId}
-        timeBased={hasTime}
-        key="a"
-        onWin={onWin}
-        onLoose={onLoose}
-      ></Leaderbord>
-      </Row>
-      </Col>
-      </Row>
+        <Row style={{ padding: "10px", marginTop: "20px" }}>
+          <Quiz
+            queMultiplier={questionMultiplier}
+            gameRoomId={gameRoomId}
+            quizState={quizState}
+            hasTime={hasTime}
+            key="10"
+          ></Quiz>{" "}
+          <Col>
+            <Row style={{ padding: "10px", marginLeft: "50vw" }}>
+              {hasTime && (
+                <Timer
+                  key="555"
+                  gameRoomId={gameRoomId}
+                  quizState={quizState}
+                  overTime={overTime}
+                ></Timer>
+              )}
+            </Row>
+            <Row style={{ padding: "10px", marginLeft: "50vw" }}>
+              <Leaderbord
+                gameRoomId={gameRoomId}
+                timeBased={hasTime}
+                key="a"
+                onWin={onWin}
+                onLoose={onLoose}
+              ></Leaderbord>
+            </Row>
+          </Col>
+        </Row>
       </Row>
     </div>
   );
