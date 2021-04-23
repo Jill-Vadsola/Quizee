@@ -1,0 +1,9 @@
+.quizOptionx:hover {
+  background-color: #c2af8a !important;
+}
+.quizOption {
+  background-color: wheat !important;
+}
+.abcd {
+  composes: quizOptionx quizOption;
+}

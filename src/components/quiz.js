@@ -3,8 +3,8 @@ import { auth, db } from "../config/firebaseConfig";
 import { GenrateQuestions } from "../config/GenrateQuestions";
 import { useRouter } from "next/router";
 import { useTimer } from "use-timer";
-
-
+import Grid from "antd/lib/card/Grid";
+import styles from "../style/hover.module.css";
 export default function Quiz({
   gameRoomId,
   quizState = false,
@@ -64,6 +64,7 @@ export default function Quiz({
       setCurrentOptions(currentData.o);
       setCurrentAnswer(currentData.a);
       setCurrentQue(currentData.q);
+      setCurrentQueNumber(currentQueNumber + 1);
     }
   }, [quizData]);
 
@@ -111,18 +112,56 @@ export default function Quiz({
         <div>Waiting For OtherPlayers To Join</div>
       ) : !quizOver ? (
         <div>
-          <div>
-            <div>{currentQue}</div>
-            <div>
+          <div style={{ justifyContent: "center" }}>
+            <div
+              style={{
+                fontWeight: "bolder",
+                textAlign: "center",
+                fontSize: "27px",
+              }}
+            >
+              {currentQue}
+            </div>
+            <div
+              style={{
+                justifyContent: "center",
+                display: "grid",
+                gridTemplateRows: "auto auto",
+                gridTemplateColumns: "28vw 28vw",
+                gap: "3px",
+              }}
+            >
               <div
+                className={styles.quizOptionx}
+                style={{
+                  padding: "20px",
+
+                  width: "100%",
+                  display: "inline-grid",
+                  backgroundColor: "wheat",
+                  textOverflow: "ellipsis",
+                  border: "1px black",
+                  cursor: "pointer",
+                }}
                 key="1"
                 onClick={(e) => {
                   NextQuestion(currentOptions[0]);
                 }}
               >
-                {currentOptions[0]}
+                <span>{currentOptions[0]}</span>
               </div>
               <div
+                className={styles.quizOptionx}
+                style={{
+                  padding: "20px",
+
+                  width: "100%",
+                  display: "inline-grid",
+                  backgroundColor: "wheat",
+                  textOverflow: "ellipsis",
+                  border: "1px black",
+                  cursor: "pointer",
+                }}
                 key="2"
                 onClick={(e) => {
                   NextQuestion(currentOptions[1]);
@@ -130,7 +169,18 @@ export default function Quiz({
               >
                 {currentOptions[1]}
               </div>
+
               <div
+                className={styles.quizOptionx}
+                style={{
+                  padding: "20px",
+                  width: "100%",
+                  display: "inline-grid",
+                  backgroundColor: "wheat",
+                  textOverflow: "ellipsis",
+                  border: "1px black",
+                  cursor: "pointer",
+                }}
                 key="3"
                 onClick={(e) => {
                   NextQuestion(currentOptions[2]);
@@ -139,6 +189,17 @@ export default function Quiz({
                 {currentOptions[2]}
               </div>
               <div
+                className={styles.quizOptionx}
+                style={{
+                  padding: "20px",
+
+                  width: "100%",
+                  display: "inline-grid",
+                  backgroundColor: "wheat",
+                  textOverflow: "ellipsis",
+                  border: "1px black",
+                  cursor: "pointer",
+                }}
                 key="4"
                 onClick={(e) => {
                   NextQuestion(currentOptions[3]);

@@ -37,8 +37,8 @@ function GenrateQuestions(numberQues) {
       continue;
     }
     if (arr[i - 1] === rand) {
-      if (rand === 9) {
-        arr.push(8);
+      if (rand === 10) {
+        arr.push(9);
       } else {
         rand++;
         arr.push(rand);

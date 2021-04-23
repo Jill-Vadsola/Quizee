@@ -29,9 +29,7 @@ export default function ChatBox({ ChatRoomId }) {
   return (
     <div
       style={{
-        marginRight: "20px",
-        margin: "20px",
-        width: "300px",
+        width: "280px",
         height: "400px",
       }}
     >
@@ -40,7 +38,7 @@ export default function ChatBox({ ChatRoomId }) {
           backgroundColor: "#282c34",
           border: "1px solid black",
           display: "block",
-          width: "300px",
+          // width: "300px",
           height: "400px",
           // maxWidth: "70%",
           overflowY: "scroll",
@@ -52,7 +50,7 @@ export default function ChatBox({ ChatRoomId }) {
             <Message
               content={c.content}
               name={c.name}
-              key={c.content}
+              key={c.content + Date.now()}
               isMe={c.uid === auth.currentUser.uid}
             ></Message>
           ))
@@ -61,7 +59,7 @@ export default function ChatBox({ ChatRoomId }) {
         )}
         <div
           style={{
-            position: "",
+            position: "relative",
 
             bottom: "0px",
             display: "block",
@@ -78,12 +76,31 @@ export default function ChatBox({ ChatRoomId }) {
       >
         <Input
           style={{}}
+          onKeyPress={(e) => {
+            if (e.code === "Enter") {
+              setMessage("");
+              setChats(chats);
+              db.collection("chatRooms")
+                .doc(ChatRoomId)
+                .update({
+                  chats: [
+                    ...chats,
+                    {
+                      uid: auth.currentUser.uid,
+                      name: auth.currentUser.displayName,
+                      content: message,
+                    },
+                  ],
+                });
+            }
+          }}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Enter message"
         ></Input>
         <Button
           onClick={() => {
+            setMessage("");
             setChats(chats);
             db.collection("chatRooms")
               .doc(ChatRoomId)
