@@ -80,6 +80,7 @@ export default function Casual() {
         backgrounddivor: "rgba(187,147,83,0.85)",
         width: "100%",
         height: "680px",
+        overflowY: "hidden",
       }}
     >
       <div style={{ textAlign: "center" }}>

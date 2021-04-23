@@ -45,10 +45,11 @@ export default function Leaderbord({
     <div
       style={{
         margin: "7px",
+        textAlign: "center",
       }}
     >
       {ended && <div>{winner ? "Winner" : "Better Luck Next Time"}</div>}
-
+      <h2>Leaderboard</h2>
       <table
         style={{
           tableLayout: "fixed",
