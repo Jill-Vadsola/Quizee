@@ -49,8 +49,13 @@ const Complete = () => {
   }
 
   return (
+    <body style={{
+      backgroundColor:"rgba(187,147,83,25)",
+      width:"100%",
+      height:"680px"
+    }}>
     <Form
-      style={{ maxWidth: "300px", marginTop: "150px", marginLeft: "40%" }}
+      style={{ maxWidth: "300px",position:"relative",top:"13vw", marginLeft: "40%",backgroundColor:"rgb(44,44,52,0.95)",padding:"15px",borderRadius:"25px"}}
       name="normal_login"
       className="login-form"
       initialValues={{
@@ -87,7 +92,7 @@ const Complete = () => {
       >
         <AutoComplete
           style={{
-            width: "300px",
+            width: "270px",
           }}
           onSearch={handleSearch}
           placeholder="Email"
@@ -118,8 +123,8 @@ const Complete = () => {
           placeholder="Password"
         />
       </Form.Item>
-      <Form.Item>
-        <a
+      <Form.Item style={{textAlign:"center"}}>
+        <a 
           onClick={() => {
             auth.sendPasswordResetEmail(email);
           }}
@@ -131,7 +136,7 @@ const Complete = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button
+        <Button style={{position:"relative",left:"7vw"}}
           onClick={LoginWithFirebase}
           type="primary"
           htmlType="submit"
@@ -141,6 +146,7 @@ const Complete = () => {
         </Button>
       </Form.Item>
     </Form>
+    </body>
   );
 };
 export default Complete;
