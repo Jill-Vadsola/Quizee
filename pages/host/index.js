@@ -111,7 +111,7 @@ export default function Host() {
               border: "1px solid black",
             }}
           >
-            <td colspan="2" style={{ padding: "10px" }}>
+            <td colSpan="2" style={{ padding: "10px" }}>
               <Button
                 onClick={(e) => {
                   MakeRoom();
