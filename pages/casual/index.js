@@ -16,9 +16,9 @@ export default function Casual() {
   //For Future Use (without counter Games)
   const hasTime = true;
   //Time Limit
-  const overTime = 15000;
+  const overTime = 40;
   //Automatically start when player count matched
-  const playerCount = 3;
+  const playerCount = 5;
   //Number Of Questions Asked in Round
   const questionMultiplier = 3;
   useEffect(() => {
