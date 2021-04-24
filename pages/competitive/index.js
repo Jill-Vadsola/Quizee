@@ -7,6 +7,7 @@ import { auth, db } from "../../src/config/firebaseConfig";
 import Leaderbord from "../../src/components/LeaderBord";
 import Timer from "../../src/components/timer";
 import firebase from "firebase";
+import { Divider } from "antd";
 export default function Casual() {
   const [gameRoomId, setGameRoomId] = useState("");
   const [chatRoomIdm, setChatRoomId] = useState("");
@@ -75,27 +76,15 @@ export default function Casual() {
     <div style={{
       backgroundColor:"rgba(187,147,83,25)",
       width:"100%",
-      height:"680px"
+      height:"680px",
+      overflowY: "hidden"
     }}>
-      <h3 style={{marginLeft:"15px"}}>
+      <div style={{ textAlign: "center" }}>
+      <h2 style={{marginLeft:"15px"}}>
         Answer All {questionMultiplier * 5} questions Before Timer Runs Out To
         Win
-      </h3>
-      <Row>
-        <Col style={{position:"relative",top:"1vw"}}>
-      <ChatBox ChatRoomId={chatRoomIdm} key="1"></ChatBox>
-      </Col>
-      <Row style={{padding: "10px",marginTop:"20px"}}>
-      <Quiz
-        queMultiplier={questionMultiplier}
-        gameRoomId={gameRoomId}
-        quizState={quizState}
-        hasTime={hasTime}
-        key="10"
-      ></Quiz>{" "}
-       <Col>
-      <Row style={{padding: "10px",
-      marginLeft:"50vw"}}>
+      </h2>
+      <Divider></Divider>
       {hasTime && (
         <Timer
           key="555"
@@ -104,21 +93,30 @@ export default function Casual() {
           overTime={overTime}
         ></Timer>
       )}
-      </Row>
-      <Row
-      style={{padding: "10px",
-      marginLeft:"50vw"}}>
-      <Leaderbord
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+        <Leaderbord
         gameRoomId={gameRoomId}
         timeBased={hasTime}
         key="a"
         onWin={onWin}
         onLoose={onLoose}
       ></Leaderbord>
-      </Row>
-      </Col>
-      </Row>
-      </Row>
+      </div>
+        <div>
+      <Quiz
+        queMultiplier={questionMultiplier}
+        gameRoomId={gameRoomId}
+        quizState={quizState}
+        hasTime={hasTime}
+        key="10"
+      ></Quiz>{" "}
+       </div>
+      <div>
+       <ChatBox ChatRoomId={chatRoomIdm} key="1"></ChatBox>
+        </div>
+       </div>
     </div>
   );
 }

@@ -51,7 +51,7 @@ export default function Home() {
 
             <Descriptions
             style={{
-              marginLeft:"10px",
+              marginLeft:"10px",marginRight:"10px"
             }}
               key="xasxaxa"
               bordered

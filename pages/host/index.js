@@ -42,7 +42,7 @@ export default function Host() {
       height:"680px"}}>
     <div 
     >
-    <table style={{marginLeft:"40%",border: "1px solid black",marginTop:"20px"}}>
+    <table style={{marginLeft:"40%",border: "1px solid black",position:"relative",top:"12vw"}}>
       <tr style={{textAlign:"center",backgroundColor:"rgb(44,44,52,0.95)"}}>
         <th colspan="2">
       <h1 style={{color:"whitesmoke"}}>Game Settings</h1>
@@ -99,27 +99,20 @@ export default function Host() {
             quizState={started}
             overTime={time}
           ></Timer>
-          <Quiz
-            queMultiplier={NumQues / 5}
-            gameRoomId={roomId}
-            quizState={started}
-            hasTime={true}
-            key="10"
-          ></Quiz>
+          
         </div>
       ) : (
         <div>
-          <h1>Room Id : {roomId}</h1>
-          <p>Share This To Your Friend </p>
-          <div
-            style={{
-              paddingRight: "20vw",
-            }}
-          ></div>
-          <Button onClick={(e) => StartQuiz()}>Start Quiz</Button>
+          <h1 style={{marginLeft:"15px"}}>Room Id : {roomId}</h1>
+          <p style={{marginLeft:"15px"}}>Share This To Your Friend </p>
+          <div></div>
+          <Button style={{position:"relative",top:"13vw",left:"47vw"}}
+          type="primary" shape="round" size="large"
+           onClick={(e) => StartQuiz()}>Start Quiz</Button>
         </div>
       )}
-      <ChatBox ChatRoomId={chatRoomId}></ChatBox>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
       <Leaderbord
         gameRoomId={roomId}
         timeBased={true}
@@ -127,6 +120,20 @@ export default function Host() {
         onWin={() => {}}
         onLoose={() => {}}
       ></Leaderbord>
+      </div>
+      <div>
+      <Quiz
+            queMultiplier={NumQues / 5}
+            gameRoomId={roomId}
+            quizState={started}
+            hasTime={true}
+            key="10"
+          ></Quiz>
+          </div>
+          <div>
+      <ChatBox ChatRoomId={chatRoomId}></ChatBox>
+      </div>
+      </div>
     </div>
   );
 }

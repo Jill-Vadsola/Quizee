@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useTimer } from "use-timer";
 import Grid from "antd/lib/card/Grid";
 import styles from "../style/hover.module.css";
+import { Button, Radio } from 'antd';
 export default function Quiz({
   gameRoomId,
   quizState = false,
@@ -212,13 +213,14 @@ export default function Quiz({
         </div>
       ) : (
         <div>
-          <button
+          <Button type="primary" shape="round" size="large" 
+          style={{position:"relative",top:"13vw"}}
             onClick={(e) => {
               router.push("/");
             }}
           >
             GO TO HOME
-          </button>
+          </Button>
         </div>
       )}
     </div>

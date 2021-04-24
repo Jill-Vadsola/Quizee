@@ -59,15 +59,15 @@ export default function Join() {
       {!isConnected ? (
         <div>
           <input
-          style={{position:"relative",left:"45vw",top:"18vw"}}
-            placeholder="Enter Room Code"
+          style={{position:"relative",left:"40vw",top:"18vw",padding:"5px",width:"300px"}}
+            placeholder="Enter Room Code Here"
             value={roomCodeInput}
             onChange={(e) => {
               setRoomCodeInput(e.target.value);
             }}
           ></input>
           <Button type="primary" shape="round" size="large" 
-          style={{position:"relative",left:"37vw",top:"20.5vw"}}
+          style={{position:"relative",left:"20.5vw",top:"21vw",width:"300px"}}
             onClick={(e) => {
               setRoomCode(roomCodeInput);
             }}
@@ -86,18 +86,13 @@ export default function Join() {
                 quizState={gameStarted}
                 overTime={time}
               ></Timer>
-              <Quiz
-                queMultiplier={queNums}
-                gameRoomId={roomCode}
-                quizState={gameStarted}
-                hasTime={true}
-                key="10"
-              ></Quiz>
+              
             </div>
           ) : (
-            <h3>Waiting for Host To Start Game</h3>
+            <h2 style={{marginLeft:"15px"}}>Waiting for Host To Start Game</h2>
           )}
-          <ChatBox ChatRoomId={chatRoomCode}></ChatBox>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div>
           <Leaderbord
             gameRoomId={roomCode}
             timeBased={true}
@@ -105,6 +100,20 @@ export default function Join() {
             onWin={() => {}}
             onLoose={() => {}}
           ></Leaderbord>
+          </div>
+          <div>
+          <Quiz
+                queMultiplier={queNums}
+                gameRoomId={roomCode}
+                quizState={gameStarted}
+                hasTime={true}
+                key="10"
+              ></Quiz>
+              </div>
+              <div>
+              <ChatBox ChatRoomId={chatRoomCode}></ChatBox>
+              </div>
+              </div>
         </div>
       )}
     </div>
