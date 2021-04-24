@@ -94,11 +94,20 @@ const RegistrationForm = () => {
       .catch(function (error) {});
   };
   return (
+    <body style={{
+      backgroundColor:"rgba(187,147,83,25)",
+      width:"100%",
+      height:"680px"
+    }}>
     <Form
       style={{
         marginLeft: "20vw",
         marginRight: "20vw",
-        marginTop: "70px",
+        position:"relative",
+        top:"8vw",
+        backgroundColor:"rgb(44,44,52,0.95)",
+        padding:"15px",borderRadius:"25px",
+        boxShadow:"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
       }}
       {...formItemLayout}
       form={form}
@@ -107,7 +116,7 @@ const RegistrationForm = () => {
       labelAlign="left"
     >
       <Form.Item
-        label="Email"
+        label={<span style={{color: "whitesmoke"}}>Email</span>}
         value={email}
         onChange={(e) => {
           setEmail(e.target.value);
@@ -130,7 +139,7 @@ const RegistrationForm = () => {
 
       <Form.Item
         name="username"
-        label="Username"
+        label={<span style={{color: "whitesmoke"}}>Username</span>}
         value={username}
         onChange={(e) => {
           setUsername(e.target.value);
@@ -148,7 +157,7 @@ const RegistrationForm = () => {
       <Form.Item
         value={password}
         name="password"
-        label="Password"
+        label={<span style={{color: "whitesmoke"}}>Password</span>}
         rules={[
           {
             required: true,
@@ -166,7 +175,7 @@ const RegistrationForm = () => {
 
       <Form.Item
         name="confirm"
-        label="Confirm Password"
+        label={<span style={{color: "whitesmoke"}}>Confirm Password</span>}
         dependencies={["password"]}
         hasFeedback
         rules={[
@@ -190,7 +199,7 @@ const RegistrationForm = () => {
         <Input.Password />
       </Form.Item>
       <Form.Item
-        label="Birth Date"
+        label={<span style={{color: "whitesmoke"}}>Birth Date</span>}
         rules={[
           {
             required: true,
@@ -210,10 +219,12 @@ const RegistrationForm = () => {
           }}
         />
       </Form.Item>
-      <Button type="primary" onClick={CreateUser}>
+      <Button type="primary" onClick={CreateUser}
+      style={{position:"relative",left:"28vw"}}>
         Signin
       </Button>
     </Form>
+    </body>
   );
 };
 export default RegistrationForm;

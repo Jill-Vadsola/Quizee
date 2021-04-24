@@ -55,7 +55,7 @@ const Complete = () => {
       height:"680px"
     }}>
     <Form
-      style={{ maxWidth: "300px",position:"relative",top:"13vw", marginLeft: "40%",backgroundColor:"rgb(44,44,52,0.95)",padding:"15px",borderRadius:"25px"}}
+      style={{ maxWidth: "300px",position:"relative",top:"13vw", marginLeft: "40%",backgroundColor:"rgb(44,44,52,0.95)",padding:"15px",borderRadius:"25px",boxShadow:"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"}}
       name="normal_login"
       className="login-form"
       initialValues={{
