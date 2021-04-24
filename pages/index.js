@@ -38,7 +38,9 @@ export default function Home() {
     <div style={{
       backgroundColor:"rgba(187,147,83,25)",
       width:"100%",
-      height:"auto"
+      height:"auto",
+      position:"relative",
+      top:"-2vw"
     }}>
       <Head>
         <title>Quizee</title>
