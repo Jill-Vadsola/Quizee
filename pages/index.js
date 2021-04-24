@@ -40,7 +40,6 @@ export default function Home() {
       width:"100%",
       height:"auto",
       position:"relative",
-      top:"-2vw"
     }}>
       <Head>
         <title>Quizee</title>
